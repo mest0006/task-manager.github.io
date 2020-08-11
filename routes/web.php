@@ -13,13 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-// Route::get('/login', function () {
-//     return view('login');
-// });
-Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
+Auth::routes();
 Route::get('/', 'TaskController@index');
+Route::get('/', 'HomeController@index')->name('home');
+Route::post('/task', "TaskController@store");
+Route::put('/task/{$id}', "TaskController@update");
+Route::delete('/task/{$id}', "TaskController@destroy");
