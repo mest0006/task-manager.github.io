@@ -15,8 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes();
-Route::get('/', 'TaskController@index');
-Route::get('/', 'HomeController@index')->name('home');
-Route::post('/task', "TaskController@store");
-Route::put('/task/{$id}', "TaskController@update");
-Route::delete('/task/{$id}', "TaskController@destroy");
+
+Route::get('/', 'GroupController@index');
+Route::post('/item', "GroupController@store");
