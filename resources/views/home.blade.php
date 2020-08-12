@@ -20,7 +20,7 @@
 
                     
                     <a href="/list/edit/{{$groups->id}}" class="btn btn-light"><i class="fas fa-pencil-alt"></i></a>
-                    <a href="/list" class="btn btn-outline-{{$groups->color}} btn-lg btn-block mx-3">  {{$groups->name}}</a>
+                    <a href="/list/{{$groups->id}}" class="btn btn-outline-{{$groups->color}} btn-lg btn-block mx-3">  {{$groups->name}}</a>
                     <form method="post" action="/item/{{ $groups->id}}">
                         @csrf
                         @method('delete')

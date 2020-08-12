@@ -15,9 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes();
-
+Route::get('/edit', 'TaskController@index');
 Route::get('/', 'GroupController@index');
+Route::get('/list/edit/{id}', "GroupController@edit");
 Route::post('/item', "GroupController@store");
-Route::post('/list/edit/{id}', "GroupController@edit");
+
 
 Route::delete('/item/{id}', "GroupController@destroy");
