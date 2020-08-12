@@ -18,3 +18,6 @@ Auth::routes();
 
 Route::get('/', 'GroupController@index');
 Route::post('/item', "GroupController@store");
+Route::post('/list/edit/{id}', "GroupController@edit");
+// Route::post('/item/{id}', "GroupController@update");
+// Route::delete('/item/{id}', "GroupController@destroy");
