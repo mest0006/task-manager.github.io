@@ -4,14 +4,15 @@
 <div class="container">
 <div class="row justify-content-center">
         <div class="col-8">
-        <h1 class="display-4">Task List for</h1>
+        <h1 class="display-4">Task  for {{ Auth::user()->name }}</h1>
             <ul class="list-group"> 
             @foreach($tasks as $task)
             <li class="list-group-item d-flex align-items-center"> 
             <form action="/task/{{$task->id}}" method="post">
             @csrf
             @method('put')
-            <input type="hidden" name="checked" value="{{$task->checked ? 0:1}}">
+            <input type="hidden" name="completed" value="{{$task->completed ? 0 : 1}}">
+            <input type="hidden" name="group_id" value="{{$group->id}}">
             <button class="btn
             @if ($task->checked)
             btn-success
@@ -24,6 +25,7 @@
             </span>
             <form class="ml-auto" action="/task/{{$task->id}}" method="post">
             @csrf
+            <input type="hidden" name="group_id" value="{{$group->id}}">
             @method('delete')
             <button class="btn btn-danger">
             <i class="fas fa-trash-alt"></i>
@@ -32,11 +34,44 @@
             </li>
             @endforeach 
             <li class="list-group-item">
-            <form method="post" action="/task">  
-            @csrf 
-            <input type="text" name="description">
-            </form > 
+           
+            
+            
+
+
+
+            <div class="card">
+              <h5 class="card-header"> New Task  </h5>
+              <div class="card-body">
+                <form method="post" action="/task">  
+                  @csrf 
+                  
+                  <input type="hidden" name="group_id" value="{{$group->id}}">
+                                    <div class="row">
+                      <div class="col">
+                       
+                          <input class="form-control" type="text" name="description" placeholder="Add  Task">
+                      </div>
+                     
+                  </div>
+                  <div class="row mt-3">
+                      <div class="col">
+                          <button class="btn btn-success">Add Task</button>
+                      </div>
+                  </div>
+              </form>
+              
+              </div>
+            </div>
+
+
             </li>
+
+
+
+
+
+
             </ul>
         </div>
     </div>

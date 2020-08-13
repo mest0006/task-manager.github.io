@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use Auth;
 use App\Task;
 use App\Group;
+use Auth;
 
 class TaskController extends Controller
 {
@@ -16,31 +15,32 @@ class TaskController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index($id)
     {
-        // $group = Group::all();        
-        // $groupId =  Group::user()->id;
-        // $userGroup = Group::where('user_id', $userId )->get();
-        $task = Task::all();
-        return view('task', ['tasks' => $task]);
+        $group = Group::find($id);
+        $task = Task::where('group_id', $id)->get();
+
+        return view('/task', ['tasks' => $task, 'group' => $group]);
     }
 
     public function store()
     {
+
         $task = new Task();
         $task->description = request('description');
+        $task->group_id = request('group_id');
         $task->save();
 
-        return redirect('/task');
+        return redirect('/task/' . request('group_id'));
     }
 
     public function update($id)
     {
         $task = Task::find($id);
         $task->completed = request('completed');
-        $task->save();
 
-        return redirect('/task');
+        $task->save();
+        return redirect('/task/' . request('group_id'));
     }
 
     public function destroy($id)
@@ -48,6 +48,6 @@ class TaskController extends Controller
         $task = Task::find($id);
         $task->delete();
 
-        return redirect('/task');
+        return redirect('/task/' . request('group_id'));
     }
 }

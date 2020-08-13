@@ -44,13 +44,25 @@ class GroupController extends Controller
 
     public function edit($id)
     {
-
-
-        $group = Group::find($id);
-
-        return view('/edit', ['group' => $group]);
+        $groups = Group::find($id);
+        return view('/edit', ['groups' => $groups]);
     }
 
+
+    public function update($id)
+    {
+        $group = Group::find($id);
+
+        $group->name = request('name');
+
+        $group->color = request('color');
+
+        $group->user_id = Auth::id();
+
+        $group->save();
+
+        return view('/edit', ['groups' => $group]);
+    }
 
 
 

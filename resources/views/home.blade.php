@@ -2,11 +2,13 @@
 
 @section('content')
 <div class="container">
+    <h1 class="  row h1 justify-content-center"> {{ Auth::user()->name }}'s List </h1>
+ 
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"> <h1> {{ Auth::user()->name }}'s List </h1>   </div>
-                  <h2 class="justify-content-end"> {{$group->count()}} </h2>
+                <div class="card-header"> <h1> List {{$group->count()}} </h1>   </div>
+                  
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -20,8 +22,8 @@
 
                     
                     <a href="/list/edit/{{$groups->id}}" class="btn btn-light"><i class="fas fa-pencil-alt"></i></a>
-                    <a href="/list/{{$groups->id}}" class="btn btn-outline-{{$groups->color}} btn-lg btn-block mx-3">  {{$groups->name}}</a>
-                    <form method="post" action="/item/{{ $groups->id}}">
+                    <a href="/task/{{ $groups->id }}" class="btn btn-outline-{{$groups->color}} btn-lg btn-block mx-3">  {{$groups->name}}</a>
+                    <form method="post" action="/list/{{ $groups->id}}">
                         @csrf
                         @method('delete')
                         <input type="hidden" name="_method" value="delete">
